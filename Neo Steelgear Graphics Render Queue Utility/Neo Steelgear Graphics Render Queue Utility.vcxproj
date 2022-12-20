@@ -160,12 +160,15 @@
     <ClInclude Include="RootSignature.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TextureHelper.h" />
+    <ClInclude Include="VertexJob.h" />
+    <ClInclude Include="VertexPipelineState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComputePipelineState.cpp" />
     <ClCompile Include="PipelineState.cpp" />
     <ClCompile Include="RootSignature.cpp" />
     <ClCompile Include="TextureHelper.cpp" />
+    <ClCompile Include="VertexPipelineState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DynamicIndexingBufferHelpers.hlsli" />
