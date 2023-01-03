@@ -116,8 +116,8 @@ CategoryResourceIdentifier LoadTextureStandard(const std::string & filePath,
 	unsigned char* originalData = 
 		stbi_load(filePath.c_str(), &width, &height, nullptr, CHANNELS);
 
-	CreateTexture(width, height, CHANNELS, originalData, generateMipMaps,
-		renderer, categoryIdentifier);
+	toReturn = CreateTexture(width, height, CHANNELS, originalData, 
+		generateMipMaps, renderer, categoryIdentifier);
 
 	STBI_FREE(originalData);
 	return toReturn;
@@ -135,7 +135,7 @@ CategoryResourceIdentifier LoadTextureHDR(const std::string& filePath,
 	float* originalData = 
 		stbi_loadf(filePath.c_str(), &width, &height, nullptr, CHANNELS);
 
-	CreateTexture(width, height, CHANNELS, originalData, generateMipMaps,
+	toReturn = CreateTexture(width, height, CHANNELS, originalData, generateMipMaps,
 		renderer, categoryIdentifier);
 
 	STBI_FREE(originalData);
