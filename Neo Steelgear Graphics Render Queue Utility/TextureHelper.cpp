@@ -82,7 +82,7 @@ CategoryResourceIdentifier CreateTexture(int width, int height,
 		std::vector<std::vector<T>> mipLevelData;
 		mipLevelData.resize(maxMipLevel + 1);
 		mipLevelData[0].resize(width * height * channels);
-		memcpy(mipLevelData[0].data(), originalData, width * height * channels);
+		memcpy(mipLevelData[0].data(), originalData, width * height * channels * sizeof(T));
 		GenerateMipMaps(mipLevelData, width / 2, height / 2, 1, maxMipLevel, channels);
 
 		toReturn = renderer.ResourceCategories().CreateTexture2D(
