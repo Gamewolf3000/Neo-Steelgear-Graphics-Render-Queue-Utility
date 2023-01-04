@@ -1,6 +1,7 @@
 #include "VertexPipelineState.h"
 
 #include <fstream>
+#include <string>
 
 #include <d3dcompiler.h>
 
@@ -162,7 +163,9 @@ void VertexPipelineState::Finalize(ID3D12Device* deviceToUse)
 		}
 		else
 		{
-			throw std::runtime_error("Could not create graphics pipeline state");
+			std::string errorMessage = "Could not create graphics pipeline state";
+			errorMessage += std::to_string(hr);
+			throw std::runtime_error(errorMessage.c_str());
 		}
 	}
 }
