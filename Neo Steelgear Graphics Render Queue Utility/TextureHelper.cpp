@@ -1,10 +1,15 @@
 #include "TextureHelper.h"
 
+#pragma warning(disable : 4996) // CODEC WARNING
 #include <cstdint>
 #include <limits>
+#include <locale>
+#include <codecvt>
+#include <string>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#include "DDSTextureLoader12.h"
 
 #undef max
 
@@ -143,43 +148,13 @@ CategoryResourceIdentifier LoadTextureHDR(const std::string& filePath,
 }
 
 CategoryResourceIdentifier LoadTextureCubeDDS(const std::string& filePath,
-	Renderer<2>& renderer, const CategoryIdentifier& categoryIdentifier,
-	bool generateMipMaps)
+	Renderer<2>& renderer, const CategoryIdentifier& categoryIdentifier)
 {
-	const int CHANNELS = 3;
-	int width = 1;
-	int height = 1;
 	CategoryResourceIdentifier toReturn;
-
-	Texture2DShaderResourceDesc cubeSRV;
-	cubeSRV.isTextureCube = true;
-	Texture2DComponentTemplate::TextureReplacementViews cubeView;
-	cubeView.sr = cubeSRV;
-
-	struct rgba
-	{
-		unsigned char r;
-		unsigned char g;
-		unsigned char b;
-		unsigned char a;
-	};
-
-	rgba data[6] = {
-		{255, 0, 0, 0},
-		{0, 255, 0, 0},
-		{0, 0, 255, 0},
-		{255, 255, 0, 0},
-		{0, 255, 255, 0},
-		{255, 0, 255, 0}
-	};
-
-	toReturn = renderer.ResourceCategories().CreateTexture2D(
-		categoryIdentifier, width, height, 6, 1, 1, 0, nullptr, cubeView);
-
-	for (int i = 0; i < 6; ++i)
-	{
-		renderer.ResourceCategories().SetResourceData(toReturn, &data[i], i);
-	}
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	std::wstring wide = converter.from_bytes(filePath.c_str());
+	DirectX::LoadDDSTextureFromFile(renderer, categoryIdentifier, 
+		toReturn, wide.c_str());
 
 	return toReturn;
 }

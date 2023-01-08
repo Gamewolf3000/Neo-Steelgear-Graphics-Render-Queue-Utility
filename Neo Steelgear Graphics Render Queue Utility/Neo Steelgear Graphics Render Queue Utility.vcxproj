@@ -155,6 +155,7 @@
     <ClInclude Include="ComputeJob.h" />
     <ClInclude Include="ComputePipelineState.h" />
     <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="DDSTextureLoader12.h" />
     <ClInclude Include="GraphicsEngineJob.h" />
     <ClInclude Include="PipelineState.h" />
     <ClInclude Include="RootSignature.h" />
@@ -165,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComputePipelineState.cpp" />
+    <ClCompile Include="DDSTextureLoader12.cpp" />
     <ClCompile Include="PipelineState.cpp" />
     <ClCompile Include="RootSignature.cpp" />
     <ClCompile Include="TextureHelper.cpp" />
